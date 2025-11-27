@@ -1,11 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos - Oskandre Café</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Productos - Oskandre Café</title>
+
+<style>
+body {
+    margin: 0;
+    background: #f2ebe3;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background: #7a4e2e;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    margin: 0 15px;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 30px;
+    color: #5a3d2b;
+}
+
+.productos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+
+.card {
+    width: 260px;
+    background: white;
+    margin: 20px;
+    border-radius: 15px;
+    padding: 20px;
+    transition: transform .2s;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.card button {
+    margin-top: 10px;
+    width: 100%;
+    background: #7a4e2e;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+}
+</style>
 </head>
+
 <body>
 
 <header>
@@ -18,35 +81,32 @@
     </nav>
 </header>
 
-<section class="productos">
-    <h2>Nuestros Productos</h2>
+<h2>Catálogo de Productos</h2>
 
-    <div class="producto">
-        <img src="img/cafe1.jpg" alt="Café Orgánico">
+<section class="productos">
+
+    <div class="card">
+        <img src="img/cafe1.jpg" alt="">
         <h3>Café Orgánico</h3>
         <p>250g — $150 MXN</p>
         <button>Comprar</button>
     </div>
 
-    <div class="producto">
-        <img src="img/cafe2.jpg" alt="Café Molido">
+    <div class="card">
+        <img src="img/cafe2.jpg" alt="">
         <h3>Café Molido</h3>
         <p>500g — $240 MXN</p>
         <button>Comprar</button>
     </div>
 
-    <div class="producto">
-        <img src="img/cafe3.jpg" alt="Café en Grano">
+    <div class="card">
+        <img src="img/cafe3.jpg" alt="">
         <h3>Café en Grano</h3>
         <p>1kg — $420 MXN</p>
         <button>Comprar</button>
     </div>
 
 </section>
-
-<footer>
-    © 2025 Oskandre Café - Todos los derechos reservados
-</footer>
 
 </body>
 </html>
