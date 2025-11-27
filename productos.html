@@ -1,131 +1,179 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Productos - Oskandre Café</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Oskandre</title>
 
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #3b1d0f;
-    }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3e5d8;
+            margin: 0;
+            padding: 0;
+        }
 
-    header {
-        background: #2a150b;
-        padding: 20px;
-        text-align: center;
-    }
+        header {
+            background: #4a2c16;
+            padding: 20px;
+            text-align: center;
+        }
 
-    nav a {
-        color: #fff;
-        margin: 0 15px;
-        text-decoration: none;
-        font-size: 18px;
-        font-weight: bold;
-    }
+        header h1 {
+            color: white;
+            margin: 0;
+        }
 
-    .container {
-        max-width: 1100px;
-        margin: 30px auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-    }
+        nav {
+            text-align: center;
+            background: #6f4e37;
+            padding: 10px 0;
+        }
 
-    .card {
-        background: #f1e9e4;
-        padding: 20px;
-        border-radius: 15px;
-        text-align: center;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+        }
 
-    .card img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        border-radius: 10px;
-    }
+        nav a:hover {
+            color: #f8d7a3;
+        }
 
-    .price {
-        font-size: 20px;
-        font-weight: bold;
-        margin: 10px 0;
-        color: #4b2c1d;
-    }
+        .productos {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
 
-    button {
-        background: #4a2511;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: 0.3s;
-    }
+        .producto {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
 
-    button:hover {
-        background: #7d4b2b;
-    }
-</style>
+        .producto img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .producto h3 {
+            margin-top: 15px;
+            font-size: 22px;
+            color: #4a2c16;
+        }
+
+        .precio {
+            font-size: 20px;
+            color: #6f4e37;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .btn-comprar {
+            background: #4a2c16;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .btn-comprar:hover {
+            background: #6f4e37;
+        }
+
+        .carrito-notificacion {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4a2c16;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: none;
+            font-size: 18px;
+        }
+
+    </style>
+
 </head>
-
 <body>
 
-<header>
+    <header>
+        <h1>Productos</h1>
+    </header>
+
     <nav>
         <a href="index.html">Inicio</a>
         <a href="productos.html">Productos</a>
         <a href="nosotros.html">Nosotros</a>
         <a href="contacto.html">Contacto</a>
-        <a href="carrito.html" style="color:#ffd700;">🛒 Carrito</a>
+        <a href="carrito.html">🛒 Carrito</a>
     </nav>
-</header>
 
-<h1 style="text-align:center; color:white; margin-top:20px;">Nuestros Productos</h1>
+    <div class="productos">
 
-<div class="container">
+        <!-- PRODUCTO 1 -->
+        <div class="producto">
+            <img src="oskandre/cafe1.jpg" alt="Café 1">
+            <h3>Café Orgánico</h3>
+            <p class="precio">$150 MXN</p>
+            <button class="btn-comprar" onclick="agregarCarrito('Café Orgánico',150)">Comprar</button>
+        </div>
 
-    <!-- Producto 1 -->
-    <div class="card">
-        <img src="imagenes/producto1.jpg" alt="">
-        <h3>Café Premium 500g</h3>
-        <p class="price">$180 MXN</p>
-        <button onclick="agregarCarrito('Café Premium 500g', 180)">Agregar al carrito</button>
+        <!-- PRODUCTO 2 -->
+        <div class="producto">
+            <img src="oskandre/cafe2.jpg" alt="Café 2">
+            <h3>Café Gourmet</h3>
+            <p class="precio">$180 MXN</p>
+            <button class="btn-comprar" onclick="agregarCarrito('Café Gourmet',180)">Comprar</button>
+        </div>
+
+        <!-- PRODUCTO 3 -->
+        <div class="producto">
+            <img src="oskandre/cafe3.jpg" alt="Café 3">
+            <h3>Café Especialidad</h3>
+            <p class="precio">$220 MXN</p>
+            <button class="btn-comprar" onclick="agregarCarrito('Café Especialidad',220)">Comprar</button>
+        </div>
+
+        <!-- PRODUCTO 4 -->
+        <div class="producto">
+            <img src="oskandre/cafe4.jpg" alt="Café 4">
+            <h3>Café Tradicional</h3>
+            <p class="precio">$130 MXN</p>
+            <button class="btn-comprar" onclick="agregarCarrito('Café Tradicional',130)">Comprar</button>
+        </div>
+
     </div>
 
-    <!-- Producto 2 -->
-    <div class="card">
-        <img src="imagenes/producto2.jpg" alt="">
-        <h3>Café Molido 250g</h3>
-        <p class="price">$120 MXN</p>
-        <button onclick="agregarCarrito('Café Molido 250g', 120)">Agregar al carrito</button>
-    </div>
+    <div id="notificacion" class="carrito-notificacion">Producto agregado al carrito</div>
 
-    <!-- Producto 3 -->
-    <div class="card">
-        <img src="imagenes/producto3.jpg" alt="">
-        <h3>Café en Grano 1kg</h3>
-        <p class="price">$300 MXN</p>
-        <button onclick="agregarCarrito('Café en Grano 1kg', 300)">Agregar al carrito</button>
-    </div>
+    <script>
+        function agregarCarrito(nombre, precio) {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-</div>
+            carrito.push({ nombre, precio });
 
-<script>
-function agregarCarrito(nombre, precio) {
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            localStorage.setItem("carrito", JSON.stringify(carrito));
 
-    carrito.push({ nombre, precio });
+            // Mostrar notificación
+            const notif = document.getElementById("notificacion");
+            notif.style.display = "block";
 
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-
-    alert("Producto agregado al carrito 🛒");
-}
-</script>
+            setTimeout(() => {
+                notif.style.display = "none";
+            }, 2000);
+        }
+    </script>
 
 </body>
 </html>
