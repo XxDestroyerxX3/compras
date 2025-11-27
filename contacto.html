@@ -1,15 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto - Oskandre Café</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto - Oskandre Café</title>
+
+<style>
+body {
+    margin: 0;
+    background: #ececec;
+    font-family: 'Poppins', sans-serif;
+}
+
+header {
+    text-align: center;
+    background: #332015;
+    color: white;
+    padding: 20px;
+}
+
+nav a {
+    margin: 0 10px;
+    color: #ffdda7;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 450px;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+}
+
+.container input, 
+.container textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 2px solid #332015;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #332015;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+}
+</style>
 </head>
+
 <body>
 
 <header>
-    <h1>Oskandre Café</h1>
+    <h1>Contacto</h1>
     <nav>
         <a href="index.html">Inicio</a>
         <a href="productos.html">Productos</a>
@@ -18,22 +67,16 @@
     </nav>
 </header>
 
-<section class="contacto">
-    <h2>Contacto</h2>
-    <p>WhatsApp: <strong>+52 961 123 4567</strong></p>
-    <p>Email: <strong>oskandrecafe@gmail.com</strong></p>
+<div class="container">
+    <h2>Ponte en contacto</h2>
 
-    <form class="formulario">
-        <input type="text" placeholder="Tu nombre" required>
-        <input type="email" placeholder="Correo" required>
-        <textarea placeholder="Mensaje" required></textarea>
-        <button type="submit">Enviar</button>
-    </form>
-</section>
+    <input type="text" placeholder="Tu nombre" required>
+    <input type="email" placeholder="Tu correo" required>
+    <textarea rows="4" placeholder="Mensaje"></textarea>
 
-<footer>
-    © 2025 Oskandre Café - Todos los derechos reservados
-</footer>
+    <button>Enviar</button>
+</div>
 
 </body>
 </html>
+
