@@ -1,15 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosotros - Oskandre Café</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosotros - Oskandre Café</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Cambria, serif;
+}
+
+header {
+    background: #8b5b35;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+nav a {
+    color: #ffe7c2;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.section {
+    display: flex;
+    padding: 40px;
+    background: #f7f1e8;
+}
+
+.texto {
+    width: 50%;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.imagen {
+    width: 50%;
+}
+
+.imagen img {
+    width: 100%;
+    border-radius: 15px;
+}
+</style>
 </head>
+
 <body>
 
 <header>
-    <h1>Oskandre Café</h1>
+    <h1>Nosotros</h1>
     <nav>
         <a href="index.html">Inicio</a>
         <a href="productos.html">Productos</a>
@@ -18,21 +59,24 @@
     </nav>
 </header>
 
-<section class="nosotros">
-    <h2>Sobre Nosotros</h2>
-    <p>
-        Oskandre Café nació con la misión de ofrecer café artesanal de la más alta calidad,
-        cultivado por productores locales y tostado cuidadosamente.
-    </p>
-    <p>
-        Creemos en el comercio justo, la calidad y el sabor auténtico. Cada taza es una
-        experiencia única.
-    </p>
-</section>
+<section class="section">
+    <div class="texto">
+        <h2>Nuestra Historia</h2>
+        <p>
+            En Oskandre Café combinamos tradición, pasión y calidad.
+            Trabajamos con caficultores locales para ofrecer un producto auténtico,
+            fresco y lleno de aroma.
+        </p>
+        <p>
+            Cada taza es una experiencia artesanal hecha con amor.
+        </p>
+    </div>
 
-<footer>
-    © 2025 Oskandre Café - Todos los derechos reservados
-</footer>
+    <div class="imagen">
+        <img src="img/cafe-historia.jpg">
+    </div>
+</section>
 
 </body>
 </html>
+
