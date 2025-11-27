@@ -1,81 +1,126 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nosotros - Oskandre Café</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - Oskandre Café</title>
 
-<style>
-body {
-    margin: 0;
-    font-family: Cambria, serif;
-}
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4E342E, #3E2723);
+            color: #333;
+        }
 
-header {
-    background: #8b5b35;
-    padding: 20px;
-    text-align: center;
-    color: white;
-}
+        /* --- NAV --- */
+        nav {
+            background: #2e1d18;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
 
-nav a {
-    color: #ffe7c2;
-    text-decoration: none;
-    margin: 0 10px;
-}
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .content-box {
+            max-width: 850px;
+            background: #fafafa;
+            margin: 40px auto;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            animation: fadeIn 1s ease;
+        }
 
-.section {
-    display: flex;
-    padding: 40px;
-    background: #f7f1e8;
-}
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #4e342e;
+            margin-bottom: 15px;
+        }
 
-.texto {
-    width: 50%;
-    padding: 20px;
-    font-size: 20px;
-}
+        h2 {
+            color: #5d4037;
+            margin-top: 30px;
+        }
 
-.imagen {
-    width: 50%;
-}
+        p {
+            text-align: justify;
+            line-height: 1.7;
+            font-size: 18px;
+        }
 
-.imagen img {
-    width: 100%;
-    border-radius: 15px;
-}
-</style>
+        /* Animación */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Imagen decorativa */
+        .banner {
+            width: 100%;
+            height: 260px;
+            border-radius: 20px;
+            background-image: url("oskandre/cafeDeChiapas.jpg");
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+        }
+
+    </style>
 </head>
-
 <body>
 
-<header>
-    <h1>Nosotros</h1>
+    <!-- NAV -->
     <nav>
         <a href="index.html">Inicio</a>
         <a href="productos.html">Productos</a>
         <a href="nosotros.html">Nosotros</a>
         <a href="contacto.html">Contacto</a>
     </nav>
-</header>
 
-<section class="section">
-    <div class="texto">
-        <h2>Nuestra Historia</h2>
-        <p>
-            En Oskandre Café combinamos tradición, pasión y calidad.
-            Trabajamos con caficultores locales para ofrecer un producto auténtico,
-            fresco y lleno de aroma.
-        </p>
-        <p>
-            Cada taza es una experiencia artesanal hecha con amor.
-        </p>
-    </div>
+    <!-- CONTENIDO -->
+    <div class="content-box">
 
-    <div class="imagen">
-        <img src="img/cafe-historia.jpg">
+        <div class="banner"></div>
+
+        <h1>Sobre Nosotros</h1>
+
+        <p>
+            En <b>Oskandre Café</b> nos apasiona llevar hasta tu mesa los mejores sabores de Chiapas.
+            Somos un proyecto que nació con la idea de compartir café auténtico, natural y lleno de aroma,
+            producido por manos chiapanecas que cuidan cada detalle del proceso.
+        </p>
+
+        <p>
+            Nuestro compromiso es ofrecer productos de calidad, desde café artesanal hasta vinagres,
+            cervezas artesanales y mucho más. Cada uno de nuestros productos es seleccionado con cuidado,
+            garantizando frescura, sabor y tradición.
+        </p>
+
+        <h2>Misión</h2>
+        <p>
+            Brindar productos naturales y artesanales de la más alta calidad,
+            promoviendo el consumo local y apoyando a productores de la región.
+        </p>
+
+        <h2>Visión</h2>
+        <p>
+            Ser una marca reconocida por su calidad, compromiso y conexión con la cultura chiapaneca,
+            expandiendo nuestros productos a nivel nacional e internacional.
+        </p>
+
     </div>
-</section>
 
 </body>
 </html>
