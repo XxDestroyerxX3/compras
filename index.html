@@ -1,102 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oskandre Café - Inicio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oskandre Café - Inicio</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+        }
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #1a1a1a;
-    color: white;
-}
+        /* NAV */
+        nav {
+            background: #3e2723;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
 
-header {
-    padding: 20px 40px;
-    background: #2e1d13;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        /* Logo a pantalla completa */
+        .hero {
+            width: 100%;
+            height: 100vh; /* Ocupa toda la pantalla */
+            background-image: url("oskandre/logo.jpg");
+            background-size: cover; /* Lo hace ajustarse sin deformarse */
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-header h1 {
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-nav a {
-    color: #ffddae;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 18px;
-}
-
-.hero {
-    background: url('img/cafe-dark.jpg') center/cover;
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
-    padding-left: 80px;
-    animation: fadeIn 2s;
-}
-
-.hero h2 {
-    font-size: 60px;
-    margin-bottom: 10px;
-}
-
-.hero p {
-    font-size: 22px;
-    margin-bottom: 20px;
-}
-
-.btn {
-    padding: 12px 25px;
-    background: #c29464;
-    color: black;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
-footer {
-    background: #2e1d13;
-    padding: 15px;
-    text-align: center;
-}
-</style>
+        .titulo {
+            text-align: center;
+            font-size: 40px;
+            margin-top: 30px;
+            color: #5d4037;
+            font-weight: bold;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-    <h1>Oskandre Café</h1>
     <nav>
         <a href="index.html">Inicio</a>
         <a href="productos.html">Productos</a>
         <a href="nosotros.html">Nosotros</a>
         <a href="contacto.html">Contacto</a>
     </nav>
-</header>
 
-<section class="hero">
-    <h2>Bienvenidos a Oskandre</h2>
-    <p>El café que despierta tus sentidos.</p>
-    <a href="productos.html" class="btn">Ver Productos</a>
-</section>
+    <!-- SECCIÓN DE LOGO A PANTALLA COMPLETA -->
+    <div class="hero"></div>
 
-<footer>© 2025 Oskandre Café</footer>
+    <h1 class="titulo">Bienvenidos a Oskandre</h1>
 
 </body>
 </html>
-
-
