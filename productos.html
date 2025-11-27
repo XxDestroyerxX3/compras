@@ -101,9 +101,7 @@
             display: none;
             font-size: 18px;
         }
-
     </style>
-
 </head>
 <body>
 
@@ -123,34 +121,34 @@
 
         <!-- PRODUCTO 1 -->
         <div class="producto">
-            <img src="oskandre/cafe1.jpg" alt="Café 1">
-            <h3>Café Orgánico</h3>
-            <p class="precio">$150 MXN</p>
-            <button class="btn-comprar" onclick="agregarCarrito('Café Orgánico',150)">Comprar</button>
+            <img src="oskandre/Bolsitas.jpg" alt="Bolsitas">
+            <h3>Café en Bolsitas</h3>
+            <p class="precio">$120 MXN</p>
+            <button class="btn-comprar" onclick="agregarCarrito('Café en Bolsitas',120)">Comprar</button>
         </div>
 
         <!-- PRODUCTO 2 -->
         <div class="producto">
-            <img src="oskandre/cafe2.jpg" alt="Café 2">
-            <h3>Café Gourmet</h3>
-            <p class="precio">$180 MXN</p>
-            <button class="btn-comprar" onclick="agregarCarrito('Café Gourmet',180)">Comprar</button>
+            <img src="oskandre/cafeDeChiapas.jpg" alt="Café Chiapas">
+            <h3>Café de Chiapas</h3>
+            <p class="precio">$160 MXN</p>
+            <button class="btn-comprar" onclick="agregarCarrito('Café de Chiapas',160)">Comprar</button>
         </div>
 
         <!-- PRODUCTO 3 -->
         <div class="producto">
-            <img src="oskandre/cafe3.jpg" alt="Café 3">
-            <h3>Café Especialidad</h3>
-            <p class="precio">$220 MXN</p>
-            <button class="btn-comprar" onclick="agregarCarrito('Café Especialidad',220)">Comprar</button>
+            <img src="oskandre/Vinagre.jpg" alt="Vinagre">
+            <h3>Vinagre Natural</h3>
+            <p class="precio">$90 MXN</p>
+            <button class="btn-comprar" onclick="agregarCarrito('Vinagre Natural',90)">Comprar</button>
         </div>
 
         <!-- PRODUCTO 4 -->
         <div class="producto">
-            <img src="oskandre/cafe4.jpg" alt="Café 4">
-            <h3>Café Tradicional</h3>
-            <p class="precio">$130 MXN</p>
-            <button class="btn-comprar" onclick="agregarCarrito('Café Tradicional',130)">Comprar</button>
+            <img src="oskandre/vinagreDeManzana.jpg" alt="Vinagre de Manzana">
+            <h3>Vinagre de Manzana</h3>
+            <p class="precio">$110 MXN</p>
+            <button class="btn-comprar" onclick="agregarCarrito('Vinagre de Manzana',110)">Comprar</button>
         </div>
 
     </div>
@@ -165,7 +163,6 @@
 
             localStorage.setItem("carrito", JSON.stringify(carrito));
 
-            // Mostrar notificación
             const notif = document.getElementById("notificacion");
             notif.style.display = "block";
 
