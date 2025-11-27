@@ -1,142 +1,78 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito - Oskandre Café</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrito - Oskandre Café</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2e7dc;
-            margin: 0;
-        }
+<style>
+    body {
+        background: #3b1d0f;
+        color: white;
+        font-family: Arial;
+        margin: 0;
+        padding: 20px;
+    }
 
-        nav {
-            background: #3e2723;
-            padding: 15px;
-            text-align: center;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 15px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
+    h1 {
+        text-align: center;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-        }
+    table {
+        width: 80%;
+        margin: auto;
+        background: #f1e9e4;
+        color: black;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
 
-        h1 {
-            text-align: center;
-            color: #4e342e;
-        }
+    td, th {
+        padding: 12px;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 25px;
-        }
-
-        th, td {
-            padding: 14px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background: #d7ccc8;
-        }
-
-        .total {
-            font-size: 24px;
-            text-align: right;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
-        .btn-eliminar {
-            background: #d32f2f;
-            color: white;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .btn-eliminar:hover {
-            background: #b71c1c;
-        }
-    </style>
+    .total {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+</style>
 </head>
+
 <body>
 
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="productos.html">Productos</a>
-        <a href="carrito.html">Carrito</a>
-        <a href="contacto.html">Contacto</a>
-    </nav>
+<h1>🛒 Carrito de Compras</h1>
 
-    <div class="container">
-        <h1>Tu Carrito</h1>
+<table id="tablaCarrito">
+    <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+    </tr>
+</table>
 
-        <table id="tabla-carrito">
-            <tr>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Eliminar</th>
-            </tr>
-        </table>
+<p class="total" id="total"></p>
 
-        <p class="total" id="total"></p>
-    </div>
+<script>
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    <script>
-        function cargarCarrito() {
-            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+let tabla = document.getElementById("tablaCarrito");
+let total = 0;
 
-            let tabla = document.getElementById("tabla-carrito");
-            let total = 0;
+carrito.forEach(item => {
+    let fila = `
+        <tr>
+            <td>${item.nombre}</td>
+            <td>$${item.precio}</td>
+        </tr>
+    `;
+    tabla.innerHTML += fila;
+    total += item.precio;
+});
 
-            carrito.forEach((item, index) => {
-                let fila = document.createElement("tr");
-
-                fila.innerHTML = `
-                    <td>${item.nombre}</td>
-                    <td>$${item.precio}</td>
-                    <td><button class="btn-eliminar" onclick="eliminar(${index})">X</button></td>
-                `;
-
-                total += item.precio;
-
-                tabla.appendChild(fila);
-            });
-
-            document.getElementById("total").innerText = "Total: $" + total;
-        }
-
-        function eliminar(indice) {
-            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
-            carrito.splice(indice, 1);
-
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-            location.reload();
-        }
-
-        cargarCarrito();
-    </script>
+document.getElementById("total").innerText = "Total: $" + total + " MXN";
+</script>
 
 </body>
 </html>
