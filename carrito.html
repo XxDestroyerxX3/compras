@@ -9,7 +9,7 @@
     body {
         background: #3b1d0f;
         color: white;
-        font-family: Arial;
+        font-family: Arial, sans-serif;
         margin: 0;
         padding: 20px;
     }
@@ -27,76 +27,46 @@
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        border-collapse: collapse;
-        display: none; /* Se mostrará solo si hay productos */
     }
 
-    th {
-        background: #d2b49c;
-        border-radius: 8px;
-    }
-
-    td, th {
-        padding: 12px;
+    th, td {
+        padding: 14px;
+        font-size: 18px;
         text-align: center;
     }
 
-    tr:nth-child(even) {
-        background: #f7f3f0;
-    }
-
-    .btn {
-        display: inline-block;
-        padding: 12px 20px;
-        margin: 10px;
-        background: #d2b49c;
-        color: black;
-        text-decoration: none;
-        font-weight: bold;
-        border-radius: 10px;
+    button {
+        padding: 8px 15px;
+        background: #5a2e18;
+        color: white;
+        border: none;
+        border-radius: 8px;
         cursor: pointer;
+        transition: 0.2s;
+        font-size: 15px;
     }
 
-    .btn:hover {
-        background: #c7a88a;
-    }
-
-    .btn-red {
-        background: #d9534f;
-        color: white;
-    }
-
-    .btn-red:hover {
-        background: #c9302c;
-    }
-
-    .btn-green {
-        background: #4CAF50;
-        color: white;
-    }
-
-    .btn-green:hover {
-        background: #449d48;
+    button:hover {
+        background: #7e3f22;
     }
 
     .total {
         text-align: center;
-        margin-top: 20px;
+        margin-top: 25px;
         font-size: 24px;
         font-weight: bold;
-        display: none; /* Aparece solo cuando hay productos */
     }
 
-    .center {
+    .btns-container {
         text-align: center;
+        margin-top: 30px;
     }
 
-    .vacio {
-        text-align: center;
-        font-size: 26px;
-        margin-top: 40px;
-        display: none;
+    .btns-container button {
+        margin: 10px;
+        font-size: 18px;
     }
+
 </style>
 </head>
 
@@ -104,21 +74,19 @@
 
 <h1>🛒 Carrito de Compras</h1>
 
-<p class="vacio" id="carritoVacio">Tu carrito está vacío 😢</p>
-
 <table id="tablaCarrito">
     <tr>
         <th>Producto</th>
         <th>Precio</th>
-        <th>Acciones</th>
+        <th>Eliminar</th>
     </tr>
 </table>
 
 <p class="total" id="total"></p>
 
-<div class="center">
-    <a href="productos.html" class="btn">⬅ Regresar a Productos</a>
-    <button class="btn-green" onclick="comprarWhatsApp()">Comprar por WhatsApp</button>
+<div class="btns-container">
+    <button onclick="regresar()">⬅ Regresar a Productos</button>
+    <button onclick="comprarWhatsapp()">💬 Comprar por WhatsApp</button>
 </div>
 
 <script>
@@ -126,69 +94,60 @@ let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 let tabla = document.getElementById("tablaCarrito");
 let total = 0;
-let mensajeVacio = document.getElementById("carritoVacio");
-let totalTexto = document.getElementById("total");
 
 function actualizarCarrito() {
     tabla.innerHTML = `
         <tr>
             <th>Producto</th>
             <th>Precio</th>
-            <th>Acciones</th>
+            <th>Eliminar</th>
         </tr>
     `;
 
     total = 0;
 
-    if (carrito.length === 0) {
-        tabla.style.display = "none";
-        totalTexto.style.display = "none";
-        mensajeVacio.style.display = "block";
-        return;
-    }
-
-    tabla.style.display = "table";
-    totalTexto.style.display = "block";
-    mensajeVacio.style.display = "none";
-
     carrito.forEach((item, index) => {
         let fila = `
             <tr>
                 <td>${item.nombre}</td>
-                <td>$${item.precio}</td>
-                <td>
-                    <button class="btn-red" onclick="eliminar(${index})">Eliminar</button>
-                </td>
+                <td>$${item.precio} MXN</td>
+                <td><button onclick="eliminar(${index})">❌</button></td>
             </tr>
         `;
         tabla.innerHTML += fila;
         total += item.precio;
     });
 
-    totalTexto.innerText = "Total: $" + total + " MXN";
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+    document.getElementById("total").innerText = "Total: $" + total + " MXN";
 }
 
 function eliminar(index) {
     carrito.splice(index, 1);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarCarrito();
 }
 
-function comprarWhatsApp() {
+function regresar() {
+    window.location.href = "productos.html";
+}
+
+function comprarWhatsapp() {
     if (carrito.length === 0) {
-        alert("Tu carrito está vacío.");
+        alert("Tu carrito está vacío");
         return;
     }
 
-    let mensaje = "Hola! Quiero realizar la siguiente compra:%0A%0A";
+    let mensaje = "Hola, quiero comprar:\n\n";
 
     carrito.forEach(item => {
-        mensaje += `• ${item.nombre} - $${item.precio}%0A`;
+        mensaje += `• ${item.nombre} - $${item.precio} MXN\n`;
     });
 
-    mensaje += `%0ATotal: $${total} MXN`;
+    mensaje += `\nTotal: $${total} MXN`;
 
-    window.open(`https://wa.me/5210000000000?text=${mensaje}`);
+    let url = `https://wa.me/5219611690247?text=${encodeURIComponent(mensaje)}`;
+
+    window.open(url, "_blank");
 }
 
 actualizarCarrito();
