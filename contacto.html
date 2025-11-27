@@ -8,68 +8,93 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4ede7;
+            font-family: "Arial", sans-serif;
+            background: linear-gradient(135deg, #4e342e, #3e2723);
+            background-attachment: fixed;
         }
 
         /* NAV */
         nav {
-            background: #3e2723;
+            background: rgba(0,0,0,0.3);
             padding: 15px;
             text-align: center;
+            backdrop-filter: blur(5px);
         }
         nav a {
-            color: white;
+            color: #ffe6d1;
             text-decoration: none;
             margin: 15px;
             font-size: 18px;
             font-weight: bold;
+            transition: 0.3s;
         }
         nav a:hover {
-            text-decoration: underline;
+            color: #ffb57f;
         }
 
         /* Título */
         h1 {
             text-align: center;
-            color: #4e342e;
+            color: #ffdec7;
             margin-top: 25px;
-            font-size: 35px;
+            font-size: 42px;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
         }
 
-        /* Contenedor */
+        /* TARJETA */
         .contenedor {
-            max-width: 600px;
+            max-width: 650px;
             margin: 40px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+            background: #ffffffdd;
+            padding: 35px;
+            border-radius: 25px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0px 8px 22px rgba(0,0,0,0.45);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .info {
             text-align: center;
-            color: #5d4037;
-            font-size: 18px;
+            color: #4e342e;
+            font-size: 19px;
             margin-bottom: 20px;
+            line-height: 1.6;
         }
 
-        /* Redes sociales */
+        /* Redes */
+        .redes-title {
+            text-align: center;
+            font-size: 26px;
+            color: #3e2723;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
         .redes {
             text-align: center;
-            margin-top: 25px;
+            margin-top: 20px;
         }
 
-        .redes img {
-            width: 70px;
-            height: 70px;
-            margin: 10px;
-            transition: transform 0.3s;
-            cursor: pointer;
+        .redes a img {
+            width: 80px;
+            height: 80px;
+            margin: 15px;
+            border-radius: 20px;
+            padding: 12px;
+            background: #ffffff;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .redes img:hover {
-            transform: scale(1.2);
+        .redes a img:hover {
+            transform: scale(1.15);
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.45);
         }
 
     </style>
@@ -92,7 +117,7 @@
             <p><strong>Ubicación:</strong> Tuxtla Gutiérrez, Chiapas</p>
         </div>
 
-        <h2 style="text-align:center; color:#4e342e;">Síguenos en redes</h2>
+        <div class="redes-title">Síguenos en nuestras redes</div>
 
         <div class="redes">
 
