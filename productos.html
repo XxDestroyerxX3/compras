@@ -37,7 +37,7 @@
             font-size: 35px;
         }
 
-        /* GALERÍA GRID */
+        /* GALERÍA */
         .galeria {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -71,6 +71,34 @@
             color: #5d4037;
             font-weight: bold;
         }
+
+        .precio {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 5px;
+            color: #4e342e;
+        }
+
+        .btn-comprar {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            background: #3e2723;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-comprar:hover {
+            background: #5d4037;
+        }
+
     </style>
 </head>
 <body>
@@ -89,26 +117,36 @@
         <div class="item">
             <img src="oskandre/Bolsitas.jpg" alt="Bolsitas de Café">
             <div class="nombre">Bolsitas de Café</div>
+            <div class="precio">$75 MXN</div>
+            <a class="btn-comprar" href="#">Comprar</a>
         </div>
 
         <div class="item">
             <img src="oskandre/CervezaDeRaiz.jpg" alt="Cerveza de Raíz">
             <div class="nombre">Cerveza de Raíz</div>
+            <div class="precio">$90 MXN</div>
+            <a class="btn-comprar" href="#">Comprar</a>
         </div>
 
         <div class="item">
             <img src="oskandre/Vinagre.jpg" alt="Vinagre">
             <div class="nombre">Vinagre</div>
+            <div class="precio">$50 MXN</div>
+            <a class="btn-comprar" href="#">Comprar</a>
         </div>
 
         <div class="item">
             <img src="oskandre/cafeDeChiapas.jpg" alt="Café de Chiapas">
             <div class="nombre">Café de Chiapas</div>
+            <div class="precio">$120 MXN</div>
+            <a class="btn-comprar" href="#">Comprar</a>
         </div>
 
         <div class="item">
             <img src="oskandre/vinagreDeManzana.jpg" alt="Vinagre de Manzana">
             <div class="nombre">Vinagre de Manzana</div>
+            <div class="precio">$55 MXN</div>
+            <a class="btn-comprar" href="#">Comprar</a>
         </div>
 
     </div>
