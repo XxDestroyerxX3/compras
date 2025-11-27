@@ -3,98 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oskandre Café - Contacto</title>
-
+    <title>Contacto - Oskandre Café</title>
     <style>
         body {
             margin: 0;
-            font-family: "Arial", sans-serif;
-            background: linear-gradient(135deg, #4e342e, #3e2723);
-            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #3e2723, #5d4037);
+            color: #333;
         }
 
         /* NAV */
         nav {
-            background: rgba(0,0,0,0.3);
+            background: #2e1d18;
             padding: 15px;
             text-align: center;
-            backdrop-filter: blur(5px);
         }
         nav a {
-            color: #ffe6d1;
+            color: white;
             text-decoration: none;
             margin: 15px;
             font-size: 18px;
             font-weight: bold;
-            transition: 0.3s;
         }
         nav a:hover {
-            color: #ffb57f;
+            text-decoration: underline;
         }
 
-        /* Título */
-        h1 {
-            text-align: center;
-            color: #ffdec7;
-            margin-top: 25px;
-            font-size: 42px;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
-        }
-
-        /* TARJETA */
-        .contenedor {
-            max-width: 650px;
+        /* Caja principal */
+        .card {
+            width: 60%;
+            max-width: 700px;
             margin: 40px auto;
-            background: #ffffffdd;
-            padding: 35px;
+            background: #f9f9f9;
+            padding: 40px;
             border-radius: 25px;
-            backdrop-filter: blur(8px);
-            box-shadow: 0px 8px 22px rgba(0,0,0,0.45);
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .info {
             text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        h1 {
             color: #4e342e;
-            font-size: 19px;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
         }
 
         /* Redes */
-        .redes-title {
-            text-align: center;
-            font-size: 26px;
-            color: #3e2723;
-            margin-bottom: 15px;
-            font-weight: bold;
+        .socials {
+            margin-top: 25px;
         }
 
-        .redes {
-            text-align: center;
-            margin-top: 20px;
+        .icon-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #4e342e;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            margin: 0 10px;
         }
 
-        .redes a img {
-            width: 80px;
-            height: 80px;
-            margin: 15px;
-            border-radius: 20px;
-            padding: 12px;
-            background: #ffffff;
-            box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
+        .icon-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
 
-        .redes a img:hover {
-            transform: scale(1.15);
-            box-shadow: 0px 8px 20px rgba(0,0,0,0.45);
+        /* Tamaño de íconos SVG */
+        svg {
+            width: 24px;
+            height: 24px;
         }
 
     </style>
@@ -108,32 +92,39 @@
         <a href="contacto.html">Contacto</a>
     </nav>
 
-    <h1>Contacto</h1>
+    <div class="card">
+        <h1>Contacto</h1>
 
-    <div class="contenedor">
-        <div class="info">
-            <p><strong>Teléfono:</strong> 961-148-4373</p>
-            <p><strong>Email:</strong> contacto@oskandre.com</p>
-            <p><strong>Ubicación:</strong> Tuxtla Gutiérrez, Chiapas</p>
-        </div>
+        <p><b>Teléfono:</b> 961-148-4373</p>
+        <p><b>Email:</b> contacto@oskandre.com</p>
+        <p><b>Ubicación:</b> Tuxtla Gutiérrez, Chiapas</p>
 
-        <div class="redes-title">Síguenos en nuestras redes</div>
+        <h2 style="color:#4e342e; margin-top: 25px;">Síguenos en nuestras redes</h2>
 
-        <div class="redes">
+        <div class="socials">
 
-            <!-- Facebook oficial -->
-            <a href="https://www.facebook.com/Oskandre?mibextid=wwXIfr" target="_blank">
-                <img src="oskandre/facebook.png" alt="Facebook">
+            <!-- Facebook -->
+            <a class="icon-btn" href="https://www.facebook.com/Oskandre?mibextid=wwXIfr" target="_blank">
+                <svg fill="#1877F2" viewBox="0 0 24 24">
+                    <path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12"/>
+                </svg>
+                Facebook
             </a>
 
-            <!-- Instagram oficial -->
-            <a href="https://www.instagram.com/oskandretgz?igsh=YTd0MDE4cGZnc2xn" target="_blank">
-                <img src="oskandre/instagram.png" alt="Instagram">
+            <!-- Instagram -->
+            <a class="icon-btn" href="https://www.instagram.com/oskandretgz?igsh=YTd0MDE4cGZnc2xn" target="_blank">
+                <svg fill="#E1306C" viewBox="0 0 24 24">
+                    <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zm-5 3.5A4.5 4.5 0 1 0 16.5 12 4.51 4.51 0 0 0 12 7.5zm0 7.4A2.9 2.9 0 1 1 14.9 12 2.9 2.9 0 0 1 12 14.9zm4.7-8.6a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1z"/>
+                </svg>
+                Instagram
             </a>
 
-            <!-- WhatsApp oficial -->
-            <a href="https://wa.me/5219611484373" target="_blank">
-                <img src="oskandre/whatsapp.png" alt="WhatsApp">
+            <!-- WhatsApp -->
+            <a class="icon-btn" href="https://wa.me/529611484373" target="_blank">
+                <svg fill="#25D366" viewBox="0 0 24 24">
+                    <path d="M12 2a10 10 0 0 0-8.7 15l-1.1 4 4.1-1A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.2-1.2l-.3-.2-2.5.6.6-2.4-.2-.3A8 8 0 1 1 12 20zm4.3-5.3c-.2-.1-1.3-.6-1.5-.7s-.4-.1-.6.1-.7.8-.9 1-.3.2-.6.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4 0-.6.1-.7l.5-.6c.2-.2.3-.4.1-.7s-1.1-2.5-1.5-3-.8-.2-1-.1A2.1 2.1 0 0 0 7 9.5c-.2.4-.2.8-.2 1.2a4.2 4.2 0 0 0 .5 2c.7 1.5 2 2.7 3.4 3.4a7 7 0 0 0 2.2.7 2 2 0 0 0 1.7-.9c.3-.4.4-.7.5-.8s0-.3-.2-.4z"/>
+                </svg>
+                WhatsApp
             </a>
 
         </div>
