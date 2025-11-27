@@ -1,82 +1,118 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contacto - Oskandre Café</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oskandre Café - Contacto</title>
 
-<style>
-body {
-    margin: 0;
-    background: #ececec;
-    font-family: 'Poppins', sans-serif;
-}
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4ede7;
+        }
 
-header {
-    text-align: center;
-    background: #332015;
-    color: white;
-    padding: 20px;
-}
+        /* NAV */
+        nav {
+            background: #3e2723;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
 
-nav a {
-    margin: 0 10px;
-    color: #ffdda7;
-    text-decoration: none;
-}
+        /* Título */
+        h1 {
+            text-align: center;
+            color: #4e342e;
+            margin-top: 25px;
+            font-size: 35px;
+        }
 
-.container {
-    max-width: 450px;
-    margin: 40px auto;
-    padding: 30px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,.2);
-}
+        /* Contenedor */
+        .contenedor {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+        }
 
-.container input, 
-.container textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 10px;
-    border: 2px solid #332015;
-}
+        .info {
+            text-align: center;
+            color: #5d4037;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
 
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    background: #332015;
-    color: white;
-    font-size: 16px;
-    border-radius: 10px;
-}
-</style>
+        /* Redes sociales */
+        .redes {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .redes img {
+            width: 70px;
+            height: 70px;
+            margin: 10px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .redes img:hover {
+            transform: scale(1.2);
+        }
+
+    </style>
 </head>
-
 <body>
 
-<header>
-    <h1>Contacto</h1>
     <nav>
         <a href="index.html">Inicio</a>
         <a href="productos.html">Productos</a>
         <a href="nosotros.html">Nosotros</a>
         <a href="contacto.html">Contacto</a>
     </nav>
-</header>
 
-<div class="container">
-    <h2>Ponte en contacto</h2>
+    <h1>Contacto</h1>
 
-    <input type="text" placeholder="Tu nombre" required>
-    <input type="email" placeholder="Tu correo" required>
-    <textarea rows="4" placeholder="Mensaje"></textarea>
+    <div class="contenedor">
+        <div class="info">
+            <p><strong>Teléfono:</strong> 961-148-4373</p>
+            <p><strong>Email:</strong> contacto@oskandre.com</p>
+            <p><strong>Ubicación:</strong> Tuxtla Gutiérrez, Chiapas</p>
+        </div>
 
-    <button>Enviar</button>
-</div>
+        <h2 style="text-align:center; color:#4e342e;">Síguenos en redes</h2>
+
+        <div class="redes">
+
+            <!-- Facebook oficial -->
+            <a href="https://www.facebook.com/Oskandre?mibextid=wwXIfr" target="_blank">
+                <img src="oskandre/facebook.png" alt="Facebook">
+            </a>
+
+            <!-- Instagram oficial -->
+            <a href="https://www.instagram.com/oskandretgz?igsh=YTd0MDE4cGZnc2xn" target="_blank">
+                <img src="oskandre/instagram.png" alt="Instagram">
+            </a>
+
+            <!-- WhatsApp oficial -->
+            <a href="https://wa.me/5219611484373" target="_blank">
+                <img src="oskandre/whatsapp.png" alt="WhatsApp">
+            </a>
+
+        </div>
+    </div>
 
 </body>
 </html>
-
