@@ -6,7 +6,7 @@
     <title>Productos - Oskandre</title>
 
     <style>
-        /* (*** CSS EXISTENTE - SIN CAMBIOS SIGNIFICATIVOS AQUÍ ***) */
+        /* Estilos Generales */
         body {
             font-family: Arial, sans-serif;
             background: #f3e5d8;
@@ -42,6 +42,7 @@
             color: #f8d7a3;
         }
 
+        /* Grid de Productos */
         .productos {
             padding: 40px;
             display: grid;
@@ -49,13 +50,14 @@
             gap: 30px;
         }
 
+        /* Tarjeta de Producto */
         .producto {
             background: white;
             border-radius: 12px;
             padding: 20px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            position: relative; /* Para posicionar el stock */
+            position: relative;
         }
 
         .producto img {
@@ -85,12 +87,12 @@
             font-weight: bold;
         }
         
-        /* Nuevo estilo para producto agotado */
         .agotado {
             opacity: 0.6;
             border: 2px solid red;
         }
 
+        /* Botones */
         .btn-comprar {
             background: #4a2c16;
             color: white;
@@ -99,6 +101,8 @@
             border-radius: 8px;
             cursor: pointer;
             transition: 0.3s ease;
+            margin-top: 5px;
+            width: 100%;
         }
 
         .btn-comprar:hover:not(:disabled) {
@@ -110,6 +114,24 @@
             cursor: not-allowed;
         }
 
+        .btn-eliminar {
+            background: #dc3545;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            font-size: 14px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .btn-eliminar:hover {
+            background: #c82333;
+        }
+
+        /* Notificación de Carrito */
         .carrito-notificacion {
             position: fixed;
             top: 20px;
@@ -123,7 +145,7 @@
             z-index: 100;
         }
         
-        /* Estilos del formulario de agregar */
+        /* Formulario de Administración */
         #formulario-agregar {
             background: white;
             padding: 20px;
@@ -135,13 +157,28 @@
             margin-right: auto;
         }
 
-        #formulario-agregar input, #formulario-agregar button {
+        #formulario-agregar input:not([type="file"]), 
+        #formulario-agregar button {
             display: block;
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+        }
+
+        #formulario-agregar input[type="file"] {
+             margin-bottom: 10px;
+             border: 1px solid #ccc;
+             padding: 10px;
+             border-radius: 4px;
+        }
+
+        #formulario-agregar label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #4a2c16;
         }
 
         #formulario-agregar button {
@@ -167,11 +204,14 @@
     </nav>
     
     <div id="formulario-agregar">
-        <h2>Añadir Nuevo Producto (Admin)</h2>
+        <h2>Añadir/Administrar Productos (Admin)</h2>
         <input type="text" id="nombre-input" placeholder="Nombre del Producto" required>
         <input type="number" id="precio-input" placeholder="Precio (MXN)" required min="1">
         <input type="number" id="stock-input" placeholder="Stock Inicial" required min="1">
-        <input type="text" id="imagen-input" placeholder="Ruta de Imagen (ej: oskandre/nueva.jpg)">
+        
+        <label for="imagen-file-input">Seleccionar Imagen (Simulación de Subida):</label>
+        <input type="file" id="imagen-file-input" accept="image/*">
+        
         <button onclick="agregarNuevoProducto()">Agregar Producto</button>
     </div>
 
@@ -181,30 +221,29 @@
     <div id="notificacion" class="carrito-notificacion"></div>
 
     <script>
-        // 1. Array de Productos con Stock (Simulación de Base de Datos)
-        // Usamos localStorage para que persista el stock y los productos agregados
+        // Inicialización del Inventario usando localStorage para persistencia
         let productos = JSON.parse(localStorage.getItem('inventarioProductos')) || [
+            // Productos iniciales si no hay nada guardado en localStorage
             { id: 1, nombre: 'Café en Bolsitas', precio: 120, imagen: 'oskandre/Bolsitas.jpg', stock: 10 },
             { id: 2, nombre: 'Café de Chiapas', precio: 160, imagen: 'oskandre/cafeDeChiapas.jpg', stock: 5 },
             { id: 3, nombre: 'Vinagre Natural', precio: 90, imagen: 'oskandre/Vinagre.jpg', stock: 20 },
             { id: 4, nombre: 'Vinagre de Manzana', precio: 110, imagen: 'oskandre/vinagreDeManzana.jpg', stock: 8 }
         ];
 
-        // Función para guardar los productos en localStorage
+        // Guarda el array de productos en localStorage
         function guardarProductos() {
             localStorage.setItem('inventarioProductos', JSON.stringify(productos));
         }
         
-        // 2. Función para renderizar los productos en la interfaz
+        // Renderiza (dibuja) todos los productos en la interfaz
         function renderizarProductos() {
             const contenedor = document.getElementById('contenedor-productos');
-            contenedor.innerHTML = ''; // Limpiar el contenedor
-            
+            contenedor.innerHTML = ''; // Limpiar el contenedor antes de dibujar
+
             productos.forEach(p => {
                 const stockTexto = p.stock > 0 ? `Stock: ${p.stock}` : '¡Agotado!';
                 const estaAgotado = p.stock <= 0;
                 
-                // Crea el elemento div.producto
                 const productoDiv = document.createElement('div');
                 productoDiv.classList.add('producto');
                 if (estaAgotado) {
@@ -217,25 +256,35 @@
                     <p class="precio">$${p.precio} MXN</p>
                     <p class="stock" id="stock-${p.id}">${stockTexto}</p>
                     <button class="btn-comprar" 
-                            onclick="agregarCarrito(${p.id}, '${p.nombre}', ${p.precio})" 
+                            onclick="agregarCarrito(${p.id})" 
                             ${estaAgotado ? 'disabled' : ''}>
                         Comprar
+                    </button>
+                    <button class="btn-eliminar" onclick="eliminarProducto(${p.id}, '${p.nombre}')">
+                        Eliminar Producto
                     </button>
                 `;
                 contenedor.appendChild(productoDiv);
             });
         }
         
-        // 3. Función para agregar nuevo producto (para el formulario de Admin)
+        // Función para agregar un nuevo producto desde el formulario
         function agregarNuevoProducto() {
             const nombre = document.getElementById('nombre-input').value;
             const precio = parseFloat(document.getElementById('precio-input').value);
             const stock = parseInt(document.getElementById('stock-input').value);
-            const imagen = document.getElementById('imagen-input').value || 'oskandre/default.jpg'; // Usa una imagen por defecto si no se da una
-            
+            const imagenFile = document.getElementById('imagen-file-input').files[0];
+
             if (!nombre || isNaN(precio) || isNaN(stock) || precio <= 0 || stock <= 0) {
                 alert('Por favor, ingresa un nombre, un precio válido y un stock válido.');
                 return;
+            }
+
+            let imagenURL = 'oskandre/default.jpg'; // Ruta por defecto
+            
+            // Simulación de subida: obtiene una URL temporal del archivo seleccionado
+            if (imagenFile) {
+                imagenURL = URL.createObjectURL(imagenFile);
             }
 
             const nuevoId = productos.length > 0 ? productos[productos.length - 1].id + 1 : 1;
@@ -244,7 +293,7 @@
                 id: nuevoId,
                 nombre: nombre,
                 precio: precio,
-                imagen: imagen,
+                imagen: imagenURL,
                 stock: stock
             });
             
@@ -256,36 +305,58 @@
             document.getElementById('nombre-input').value = '';
             document.getElementById('precio-input').value = '';
             document.getElementById('stock-input').value = '';
-            document.getElementById('imagen-input').value = '';
+            document.getElementById('imagen-file-input').value = '';
+        }
+
+        // Función para eliminar un producto
+        function eliminarProducto(id, nombre) {
+            if (confirm(`¿Estás seguro de que quieres ELIMINAR el producto: "${nombre}"? Esta acción es permanente.`)) {
+                
+                // Busca el producto para liberar la URL temporal si es necesario
+                const productoEliminado = productos.find(p => p.id === id);
+                
+                // Filtra el array, excluyendo el producto con el ID dado
+                productos = productos.filter(p => p.id !== id);
+                
+                guardarProductos();
+                renderizarProductos();
+                
+                // Libera la URL temporal de la imagen si se había subido un archivo
+                if (productoEliminado && productoEliminado.imagen.startsWith('blob:')) {
+                    URL.revokeObjectURL(productoEliminado.imagen);
+                }
+                
+                alert(`Producto "${nombre}" eliminado correctamente.`);
+            }
         }
 
 
-        // 4. Función de Carrito Actualizada (Manejo de Stock)
-        function agregarCarrito(id, nombre, precio) {
+        // Función principal para agregar un producto al carrito y gestionar el stock
+        function agregarCarrito(id) {
             let productoIndex = productos.findIndex(p => p.id === id);
+            const producto = productos[productoIndex];
 
-            if (productoIndex !== -1 && productos[productoIndex].stock > 0) {
-                // a. Disminuir el Stock
-                productos[productoIndex].stock--;
+            if (productoIndex !== -1 && producto.stock > 0) {
+                // 1. Disminuir el Stock
+                producto.stock--;
                 guardarProductos();
 
-                // b. Actualizar el DOM (el texto de stock)
-                const stockElement = document.getElementById(`stock-${id}`);
-                stockElement.textContent = `Stock: ${productos[productoIndex].stock}`;
+                // 2. Actualizar la vista (DOM) del stock
+                const stockElement = document.getElementById(`stock-${producto.id}`);
+                stockElement.textContent = `Stock: ${producto.stock}`;
                 
-                if (productos[productoIndex].stock === 0) {
-                    // Si se agota, volver a renderizar para deshabilitar el botón y poner el estilo de agotado
-                    renderizarProductos(); 
+                if (producto.stock === 0) {
+                    renderizarProductos(); // Volver a renderizar para deshabilitar el botón y aplicar el estilo "agotado"
                 }
 
-                // c. Agregar al carrito de compras (como ya lo tenías)
+                // 3. Agregar al carrito (usando localStorage)
                 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-                carrito.push({ id, nombre, precio });
+                carrito.push({ id: producto.id, nombre: producto.nombre, precio: producto.precio });
                 localStorage.setItem("carrito", JSON.stringify(carrito));
 
-                // d. Mostrar notificación
+                // 4. Mostrar notificación
                 const notif = document.getElementById("notificacion");
-                notif.textContent = `"${nombre}" agregado. Quedan ${productos[productoIndex].stock}.`;
+                notif.textContent = `"${producto.nombre}" agregado. Quedan ${producto.stock}.`;
                 notif.style.display = "block";
 
                 setTimeout(() => {
