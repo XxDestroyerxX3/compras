@@ -157,7 +157,7 @@
             margin-right: auto;
         }
 
-        #formulario-agregar input:not([type="file"]), 
+        #formulario-agregar input, 
         #formulario-agregar button {
             display: block;
             width: 100%;
@@ -166,20 +166,14 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-
-        #formulario-agregar input[type="file"] {
-             margin-bottom: 10px;
-             border: 1px solid #ccc;
-             padding: 10px;
-             border-radius: 4px;
-        }
-
+        
         #formulario-agregar label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
             color: #4a2c16;
         }
+
 
         #formulario-agregar button {
             background: #6f4e37;
@@ -209,8 +203,8 @@
         <input type="number" id="precio-input" placeholder="Precio (MXN)" required min="1">
         <input type="number" id="stock-input" placeholder="Stock Inicial" required min="1">
         
-        <label for="imagen-file-input">Seleccionar Imagen (Simulación de Subida):</label>
-        <input type="file" id="imagen-file-input" accept="image/*">
+        <label for="imagen-url-input">Ruta de Imagen (Ej: oskandre/cafe.jpg o URL externa):</label>
+        <input type="text" id="imagen-url-input" placeholder="Ruta de Imagen" required>
         
         <button onclick="agregarNuevoProducto()">Agregar Producto</button>
     </div>
@@ -273,18 +267,12 @@
             const nombre = document.getElementById('nombre-input').value;
             const precio = parseFloat(document.getElementById('precio-input').value);
             const stock = parseInt(document.getElementById('stock-input').value);
-            const imagenFile = document.getElementById('imagen-file-input').files[0];
+            // Lee la ruta o URL del nuevo campo de texto
+            const imagenURL = document.getElementById('imagen-url-input').value; 
 
-            if (!nombre || isNaN(precio) || isNaN(stock) || precio <= 0 || stock <= 0) {
-                alert('Por favor, ingresa un nombre, un precio válido y un stock válido.');
+            if (!nombre || isNaN(precio) || isNaN(stock) || precio <= 0 || stock <= 0 || !imagenURL) {
+                alert('Por favor, ingresa un nombre, precio, stock válidos y una ruta de imagen.');
                 return;
-            }
-
-            let imagenURL = 'oskandre/default.jpg'; // Ruta por defecto
-            
-            // Simulación de subida: obtiene una URL temporal del archivo seleccionado
-            if (imagenFile) {
-                imagenURL = URL.createObjectURL(imagenFile);
             }
 
             const nuevoId = productos.length > 0 ? productos[productos.length - 1].id + 1 : 1;
@@ -293,6 +281,7 @@
                 id: nuevoId,
                 nombre: nombre,
                 precio: precio,
+                // Usa la URL/Ruta ingresada por el usuario
                 imagen: imagenURL,
                 stock: stock
             });
@@ -305,26 +294,18 @@
             document.getElementById('nombre-input').value = '';
             document.getElementById('precio-input').value = '';
             document.getElementById('stock-input').value = '';
-            document.getElementById('imagen-file-input').value = '';
+            document.getElementById('imagen-url-input').value = ''; 
         }
 
         // Función para eliminar un producto
         function eliminarProducto(id, nombre) {
             if (confirm(`¿Estás seguro de que quieres ELIMINAR el producto: "${nombre}"? Esta acción es permanente.`)) {
                 
-                // Busca el producto para liberar la URL temporal si es necesario
-                const productoEliminado = productos.find(p => p.id === id);
-                
                 // Filtra el array, excluyendo el producto con el ID dado
                 productos = productos.filter(p => p.id !== id);
                 
                 guardarProductos();
                 renderizarProductos();
-                
-                // Libera la URL temporal de la imagen si se había subido un archivo
-                if (productoEliminado && productoEliminado.imagen.startsWith('blob:')) {
-                    URL.revokeObjectURL(productoEliminado.imagen);
-                }
                 
                 alert(`Producto "${nombre}" eliminado correctamente.`);
             }
