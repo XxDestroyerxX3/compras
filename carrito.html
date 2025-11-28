@@ -19,6 +19,7 @@
         margin-bottom: 20px;
     }
 
+    /* Estilos de la tabla de carrito */
     table {
         width: 90%;
         margin: auto;
@@ -27,12 +28,18 @@
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        border-collapse: collapse; /* Añadido para mejor visualización */
     }
 
     th, td {
         padding: 14px;
         font-size: 18px;
         text-align: center;
+        border-bottom: 1px solid #ccc; /* Separador de filas */
+    }
+    
+    th {
+        background: #e6dfdb;
     }
 
     button {
@@ -66,6 +73,34 @@
         margin: 10px;
         font-size: 18px;
     }
+    
+    /* Estilos del Ticket de Compra */
+    #ticket-container {
+        display: none; /* Inicialmente oculto */
+        width: 90%;
+        max-width: 400px;
+        margin: 40px auto 0;
+        padding: 20px;
+        background: white;
+        color: #333;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    }
+    
+    #ticket-container h2 {
+        text-align: center;
+        border-bottom: 2px dashed #ccc;
+        padding-bottom: 10px;
+        margin-top: 0;
+        color: #4a2c16;
+    }
+    
+    #ticket-detalles {
+        font-family: monospace;
+        white-space: pre-wrap; /* Para respetar saltos de línea y formato */
+        font-size: 14px;
+        line-height: 1.5;
+    }
 
 </style>
 </head>
@@ -75,26 +110,47 @@
 <h1>🛒 Carrito de Compras</h1>
 
 <table id="tablaCarrito">
-    <tr>
-        <th>Producto</th>
-        <th>Precio</th>
-        <th>Eliminar</th>
-    </tr>
-</table>
+    </table>
 
 <p class="total" id="total"></p>
 
 <div class="btns-container">
     <button onclick="regresar()">⬅ Regresar a Productos</button>
-    <button onclick="comprarWhatsapp()">💬 Comprar por WhatsApp</button>
+    <button id="btn-finalizar" onclick="generarTicketYComprar()">✅ Finalizar y Pagar por WhatsApp</button>
 </div>
 
-<script>
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+<div id="ticket-container">
+    <h2>TICKET DE COMPRA OSKANDRE</h2>
+    <div id="ticket-detalles"></div>
+</div>
 
+
+<script>
+// Número de teléfono de Oskandre (WhatsApp)
+const NUMERO_WHATSAPP = "5219611690247"; 
+
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let tabla = document.getElementById("tablaCarrito");
 let total = 0;
 
+// Función para generar un ID de pedido simple (por ejemplo, fecha y 4 dígitos aleatorios)
+function generarIdPedido() {
+    const fecha = new Date().toISOString().slice(0, 10).replace(/-/g, ''); // YYYYMMDD
+    const random = Math.floor(1000 + Math.random() * 9000);
+    return `OSK-${fecha}-${random}`;
+}
+
+// Cuenta la cantidad de cada producto para el ticket
+function contarProductos() {
+    const conteo = {};
+    carrito.forEach(item => {
+        // Usamos el nombre como clave para contar cuántas veces aparece
+        conteo[item.nombre] = (conteo[item.nombre] || 0) + 1;
+    });
+    return conteo;
+}
+
+// 1. Actualiza la tabla del carrito en la página
 function actualizarCarrito() {
     tabla.innerHTML = `
         <tr>
@@ -117,39 +173,112 @@ function actualizarCarrito() {
         tabla.innerHTML += fila;
         total += item.precio;
     });
-
-    document.getElementById("total").innerText = "Total: $" + total + " MXN";
+    
+    document.getElementById("total").innerText = "Total: $" + total.toFixed(2) + " MXN";
 }
 
+// 2. Elimina un producto por su índice
 function eliminar(index) {
+    // Al eliminar, necesitamos devolver el stock al inventario
+    // Esto requiere comunicación con el código de productos.html (no implementado en carrito.html)
+    // Por simplicidad, solo eliminamos del carrito.
+    
     carrito.splice(index, 1);
     localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarCarrito();
+    
+    // Ocultar el ticket si estaba visible
+    document.getElementById('ticket-container').style.display = 'none';
 }
 
+// 3. Genera el texto del ticket (formato legible)
+function generarTextoTicket() {
+    const idPedido = generarIdPedido();
+    const productosContados = contarProductos();
+    let productosTexto = "";
+    let subtotal = 0;
+
+    // Encabezado del ticket
+    let ticket = `
+========================================
+       TICKET DE COMPRA OSKANDRE
+========================================
+ID Pedido: ${idPedido}
+Fecha: ${new Date().toLocaleDateString('es-MX')}
+----------------------------------------
+DESCRIPCION:
+`;
+
+    // Detalles de los productos
+    // Iteramos sobre el conteo para agrupar productos duplicados
+    Object.keys(productosContados).forEach(nombreProducto => {
+        const cantidad = productosContados[nombreProducto];
+        // Buscamos el precio del primer item que coincida con el nombre
+        const item = carrito.find(p => p.nombre === nombreProducto); 
+        const precioUnitario = item.precio;
+        const precioTotalItem = cantidad * precioUnitario;
+        
+        // Formato para el ticket (Cantidad x Nombre = Precio Total)
+        productosTexto += `${cantidad}x ${nombreProducto.padEnd(25, ' ')}$${precioTotalItem.toFixed(2)} MXN\n`;
+        subtotal += precioTotalItem;
+    });
+    
+    ticket += productosTexto;
+
+    // Total final
+    ticket += `----------------------------------------
+SUBTOTAL:             $${subtotal.toFixed(2)} MXN
+ENVÍO:                $0.00 MXN (A coordinar)
+----------------------------------------
+TOTAL A PAGAR:        $${total.toFixed(2)} MXN
+========================================
+¡GRACIAS POR SU COMPRA!
+`;
+    
+    return ticket;
+}
+
+// 4. Muestra el ticket y luego envía el mensaje de WhatsApp
+function generarTicketYComprar() {
+    if (carrito.length === 0) {
+        alert("Tu carrito está vacío. Agrega productos antes de finalizar la compra.");
+        return;
+    }
+
+    const ticketTexto = generarTextoTicket();
+    
+    // A. Mostrar el ticket en la página
+    document.getElementById('ticket-detalles').textContent = ticketTexto;
+    document.getElementById('ticket-container').style.display = 'block';
+    
+    // B. Enviar el ticket por WhatsApp
+    // Como el ticket ya incluye todos los detalles, lo enviamos directamente
+    let url = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(ticketTexto)}`;
+
+    // C. Vaciar el carrito y guardar el estado
+    vaciarCarrito();
+    
+    // D. Abrir WhatsApp
+    window.open(url, "_blank");
+}
+
+// 5. Función para vaciar el carrito después de la compra
+function vaciarCarrito() {
+    // Es CRÍTICO vaciar el carrito DESPUÉS de obtener los datos para el ticket
+    carrito = [];
+    localStorage.removeItem("carrito");
+    
+    // Opcional: Deshabilitar el botón de finalizar hasta recargar
+    document.getElementById('btn-finalizar').disabled = true;
+    document.getElementById('btn-finalizar').textContent = 'Compra Finalizada';
+}
+
+// Funciones de navegación
 function regresar() {
     window.location.href = "productos.html";
 }
 
-function comprarWhatsapp() {
-    if (carrito.length === 0) {
-        alert("Tu carrito está vacío");
-        return;
-    }
-
-    let mensaje = "Hola, quiero comprar:\n\n";
-
-    carrito.forEach(item => {
-        mensaje += `• ${item.nombre} - $${item.precio} MXN\n`;
-    });
-
-    mensaje += `\nTotal: $${total} MXN`;
-
-    let url = `https://wa.me/5219611690247?text=${encodeURIComponent(mensaje)}`;
-
-    window.open(url, "_blank");
-}
-
+// Ejecutar al cargar
 actualizarCarrito();
 </script>
 
